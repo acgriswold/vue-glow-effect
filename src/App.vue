@@ -8,20 +8,18 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-  <main class="bg-slate-50 dark:bg-slate-700 p-8">
-    <div class="min-h-screen grid grid-cols-1 items-start">
-      <button @click="toggleDark()" class="text-slate-700 dark:text-slate-50">
-        toggle {{ isDark ? 'light' : 'dark' }}
-      </button>
+  <main class="min-h-screen p-8 flex flex-col bg-slate-50 dark:bg-slate-700">
+    <button @click="toggleDark()" class="text-slate-700 dark:text-slate-50">
+      toggle {{ isDark ? 'light' : 'dark' }}
+    </button>
 
-      <div class="flex flex-row self-stretch justify-center items-top">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://vuejs.org/" target="_blank">
-          <img src="/vue.svg" class="logo vue" alt="Vue logo" />
-        </a>
-      </div>
+    <div class="flex-1 flex flex-row justify-center items-center">
+      <a href="https://vitejs.dev" target="_blank">
+        <img src="/vite.svg" class="logo" alt="Vite logo" />
+      </a>
+      <a href="https://vuejs.org/" target="_blank">
+        <img src="/vue.svg" class="logo vue" alt="Vue logo" />
+      </a>
     </div>
   </main>
 </template>
