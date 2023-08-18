@@ -8,7 +8,20 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-  <main class="min-h-screen p-8 flex flex-col bg-slate-50 dark:bg-slate-700">
+  <main
+    class="
+      min-h-screen
+      p-8
+      flex flex-col
+      bg-slate-50
+      dark:bg-slate-700
+      bg-gradient-to-b
+      from-slate-50
+      to-green-500/30
+      dark:from-slate-700 dark:to-green-500/30
+      from-60%
+    "
+  >
     <button @click="toggleDark()" class="text-slate-700 dark:text-slate-50">
       toggle {{ isDark ? 'light' : 'dark' }}
     </button>
