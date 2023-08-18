@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue';
 
-import { useDark, useToggle, useMouse } from '@vueuse/core';
+import { useDark, useToggle, useMouse, useWindowSize } from '@vueuse/core';
 import { computed, HTMLElement, ref } from 'vue';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
 const { x, y } = useMouse();
+const { width, height } = useWindowSize()
 
+const dx = computed(() => Math.abs(x.value - width.value / 2))
+const dy = computed(() => Math.abs(y.value - height.value / 2))
+
+const distance = computed(() => Math.sqrt(dx.value * dx.value + dy.value * dy.value))
+const damper = 3
+const size = computed(() => Math.max(300-distance.value/damper, 150))
+const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.5), 1))
 
 const spotlit = ref<HTMLElement>
 const spotlightGradient = computed(
@@ -51,8 +59,9 @@ const spotlightGradient = computed(
       :style="{
         left: `${x}px`,
         top: `${y}px`,
-        width: `200px`,
-        height: `200px`,
+        width: `${size}px`,
+        height: `${size}px`,
+        opacity: `${opacity}`,
       }"
     ></div>
 
