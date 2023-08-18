@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue';
 
-import { useDark, useToggle } from '@vueuse/core';
+import { useDark, useToggle, useMouse } from '@vueuse/core';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+
+const { x, y } = useMouse();
 </script>
 
 <template>
   <main
     class="
+      relative
       min-h-screen
       p-8
       flex flex-col
@@ -20,8 +23,26 @@ const toggleDark = useToggle(isDark);
       to-green-500/30
       dark:from-slate-700 dark:to-green-500/30
       from-60%
+      overflow-hidden
     "
   >
+    <div
+      class="
+        absolute
+        bg-green-500/30
+        rounded-full
+        -translate-x-1/2 -translate-y-1/2
+        blur-3xl
+        pointer-events-none
+      "
+      :style="{
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `200px`,
+        height: `200px`,
+      }"
+    ></div>
+
     <button @click="toggleDark()" class="text-slate-700 dark:text-slate-50">
       toggle {{ isDark ? 'light' : 'dark' }}
     </button>
